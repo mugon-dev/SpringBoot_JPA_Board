@@ -17,47 +17,7 @@
 <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
 
 <title>Insert title here</title>
-<style>
-#form-container {
-  width: 500px;
-}
 
-.row {
-  margin-top: 15px;
-}
-.row.form-group {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-.btn {
-  margin-left: 15px;
-}
-
-.change-link {
-  background-color: #000;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  bottom: 0;
-  color: #fff;
-  opacity: 0.8;
-  padding: 4px;
-  position: absolute;
-  text-align: center;
-  width: 150px;
-}
-.change-link:hover {
-  color: #fff;
-  text-decoration: none;
-}
-
-img {
-  width: 150px;
-}
-
-#editor-container {
-  height: 130px;
-}
-</style>
 </head>
 <body>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

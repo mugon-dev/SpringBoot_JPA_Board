@@ -1,6 +1,9 @@
 package com.jmg.JPABoard.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,8 +27,8 @@ public class BoardController {
 
 	//메인페이지 + 리스트
 	@GetMapping({"","/","/list"})
-	public String list(Model model) {
-		model.addAttribute("boards", boardService.boardList());
+	public String list(Model model, @PageableDefault(size = 5, sort = "id", direction = Direction.DESC)Pageable pageable) {
+		model.addAttribute("boards", boardService.boardListPaging(pageable));
 		return "list";
 	}
 	

@@ -11,33 +11,50 @@
 		<tr>
 			<td>ID</td>
 			<td>TITLE</td>
-			<td>CONTENT</td>
 			<td>READCOUNT</td>
 			<td>CREATEDATE</td>
 		</tr>
 		<tr>
 			<td>${board.id }</td>
-			<td><input id="title" type="text" value="${board.title }"/></td>
-			<td><input id="content" type="text" value="${board.content }"/></td>
+			<td><input id="title" type="text" value="${board.title }" /></td>
 			<td>${board.readCount }</td>
 			<td>${board.createDate }</td>
 		</tr>
 	</table>
+	<input id="content" type="hidden">
+	<div id="editor-container">
+	</div>
 	<button onclick="deleteBoard(${board.id})">삭제</button>
 	<button onclick="updateBoard(${board.id})">수정</button>
 </main>
+<script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
 <script type="text/javascript">
+var quill = new Quill('#editor-container', {
+	modules : {
+		toolbar : [ [ 'bold', 'italic' ],
+				[ 'link', 'blockquote', 'code-block', 'image' ], [ {
+					list : 'ordered'
+				}, {
+					list : 'bullet'
+				} ] ]
+	},
+	theme : 'snow'
+});
+var content = document.querySelector('input[name=content]');
+content.value = quill.setContents(${board.content});
+
 function updateBoard(id){
 	//id,title,content
 	let title_el = document.querySelector("#title").value;
-	let content_el = document.querySelector("#content").value;
+	let content_el = document.querySelector("#content");
+	content_el.value = JSON.stringify(quill.getContents());
 	console.log("id",id);
 	console.log("title",title_el);
-	console.log("content",content_el);
+	console.log("content",content_el.value);
 
 	let board = {
 			title: title_el,
-			content: content_el
+			content: content_el.value
 			};
 	console.log(board);
 	fetch("/board/"+id,{

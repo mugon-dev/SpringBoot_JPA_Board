@@ -14,23 +14,36 @@
 			<tr>
 				<th scope="col">ID</th>
 				<th scope="col">Title</th>
-				<th scope="col">Content</th>
 				<th scope="col">READCOUNT</th>
 				<th scope="col">CREATEDATE</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="board" items="${ boards}">
+			<c:forEach var="board" items="${ boards.content}">
 			<tr>
 				<th scope="row">${board.id }</th>
 				<td><a href="/board/${board.id }">${board.title }</a></td>
-				<td>${board.content }</td>
 				<td>${board.readCount }</td>
 				<td>${board.createDate }</td>
+				<td><a href="/board/${board.id }"><button>상세보기</button></a></td>
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
+	<button onclick="prev()">이전</button>
+	<button onclick="next()">다음</button>
 </main>
-
+<script type="text/javascript">
+function prev(){
+	console.log(${boards.pageable.pageNumber });
+	var pageNumber = ${boards.pageable.pageNumber-1 };
+	location.href="/list?page="+pageNumber;
+}
+function next(){
+	console.log(${boards.pageable.pageNumber }+1);
+	var pageNumber = ${boards.pageable.pageNumber+1 };
+	location.href="/list?page="+pageNumber;
+}
+</script>
 <%@ include file="layout/footer.jsp"%>
